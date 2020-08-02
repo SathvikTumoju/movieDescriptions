@@ -1,0 +1,88 @@
+<html>
+<title> chat bot </title>
+    
+    <head> 
+    <style  type="text/css" >    
+    .first{         
+    text-align: center;
+    background-color:orange;           
+    font-size : 200%;
+    margin:10px 20px;
+    border-radius: 10%;
+      }
+        
+      .second{         
+    text-align: center;
+    font-size : 100%;
+    position: relative;
+    top: -50px;
+    padding: 30px;
+     }
+
+     .third{         
+    text-align: left;
+    position: relative;
+    top: -85px; 
+            
+    font-size : 150%;
+    padding-left: 20px;
+    color: black;
+    } 
+    </style>
+    </head>
+    
+    
+    
+
+<body style="background-color:rgb(172, 179, 243)">
+<div   class="first"   >
+<h2  id="heading" style="color: black"> MOVIE DESCRIPTIONS  </h2>
+</div>
+
+
+
+<form onsubmit="change(); return false;">
+  <div class=" second "> 
+    <input type="text" id="moviename" name="moviename" placeholder="Enter movie name..." style="width: 60%;padding: 10px;">
+    <input type="submit" value="Search..."  id="search" style="background-color: chartreuse;padding: 10px; " >
+  
+  </div>
+</form>
+
+<div  class="third"  >
+    <p id="description" >Details here...</p>
+  </div>
+<script>
+
+  async  function  change(){
+        var variable = document.getElementById("moviename").value;
+        
+         var api_url= "http://www.omdbapi.com/?apikey=6332e1e1&t="+variable;           
+
+       var responce = await fetch(api_url);
+       var data = await responce.json();
+       var { Title,Director,Writer,Actors,Genre,Language,Released,Production,imdbRating ,BoxOffice,Awards}=data;
+
+       console.log(data);
+       if(Title== undefined ){
+        document.getElementById("description").innerHTML= "   please enter valid movie name 🙄 or not available😕...";
+       }else{
+        document.getElementById("description").innerHTML= "Title : "+ Title + "<br> Director : "+Director+ "<br> Writer : "+Writer + "<br> Actors : "+Actors+ "<br>Genre : "+Genre + "<br>Language : "+Language+ "<br>Released : "+Released+ "<br>Production : "+Production+ "<br>IMDB : "+imdbRating + "<br>Awards : "+Awards + "<br>BoxOffice : "+BoxOffice;
+       }
+    }
+        
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
